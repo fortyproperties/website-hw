@@ -16,13 +16,17 @@ const SITE_URL = "https://fortyproperties.com"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+
   title: {
     default: "Forty Properties | We Buy Land for Cash",
     template: "%s | Forty Properties",
   },
+
   description:
     "Forty Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
+
   generator: "v0.app",
+
   keywords: [
     "sell land for cash",
     "sell vacant land",
@@ -33,8 +37,31 @@ export const metadata: Metadata = {
     "sell vacant property",
     "land buying company",
   ],
+
   authors: [{ name: "Forty Properties" }],
-  alternates: { canonical: "/" },
+
+  alternates: {
+    canonical: "/",
+  },
+
+  icons: {
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon-96x96.png",
+        type: "image/png",
+        sizes: "96x96",
+      },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
+  manifest: "/site.webmanifest",
+
   openGraph: {
     type: "website",
     url: SITE_URL,
@@ -51,6 +78,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Forty Properties | We Buy Land for Cash",
@@ -58,7 +86,11 @@ export const metadata: Metadata = {
       "Forty Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
     images: ["/images/hero-land.png"],
   },
-  robots: { index: true, follow: true },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export const viewport: Viewport = {
@@ -91,9 +123,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+
         <SiteHeader />
+
         <main>{children}</main>
+
         <SiteFooter />
+
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
