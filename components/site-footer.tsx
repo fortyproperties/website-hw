@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Logo } from "@/components/logo"
+import Image from "next/image"
 
 const nav = [
   { href: "/", label: "Home" },
@@ -19,9 +20,18 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Logo invert />
+            <Link href="/" aria-label="Forty Properties home">
+              <Image
+                src="/images/forty-white.svg"
+                alt="Forty Properties"
+                width={160}
+                height={40}
+                priority
+                className="h-10 w-auto"
+              />
+            </Link>
             <p className="mt-5 max-w-sm text-pretty text-sm leading-relaxed text-primary-foreground/70">
-              We Buy Land for Cash. FORTY Properties purchases vacant land
+              We Buy Land for Cash. Forty Properties purchases vacant land
               directly from owners with a simple, straightforward process.
             </p>
           </div>
@@ -51,7 +61,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-3 text-sm text-primary-foreground/80">
               <li>
                 <span className="text-primary-foreground/60">Phone: </span>
-                (000) 000-0000
+                (616) 349-1201
               </li>
               <li>
                 <span className="text-primary-foreground/60">Email: </span>
@@ -63,7 +73,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-primary-foreground/15 pt-6 text-sm text-primary-foreground/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} FORTY Properties. All rights
+            &copy; {new Date().getFullYear()} Forty Properties LLC. All rights
             reserved.
           </p>
           <ul className="flex gap-6">

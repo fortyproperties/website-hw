@@ -19,9 +19,9 @@ export function Hero() {
 
       <div className="mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-5 py-24 sm:px-8">
         <div className="max-w-2xl animate-fade-up">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-foreground/70">
-            FORTY Properties
-          </span>
+          {/* <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-foreground/70">
+            Forty Properties
+          </span> */}
           <h1 className="mt-5 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-primary-foreground sm:text-6xl">
             We Buy Land for Cash
           </h1>

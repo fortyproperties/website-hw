@@ -17,11 +17,11 @@ const SITE_URL = "https://fortyproperties.com"
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "FORTY Properties | We Buy Land for Cash",
-    template: "%s | FORTY Properties",
+    default: "Forty Properties | We Buy Land for Cash",
+    template: "%s | Forty Properties",
   },
   description:
-    "FORTY Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
+    "Forty Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
   generator: "v0.app",
   keywords: [
     "sell land for cash",
@@ -33,15 +33,15 @@ export const metadata: Metadata = {
     "sell vacant property",
     "land buying company",
   ],
-  authors: [{ name: "FORTY Properties" }],
+  authors: [{ name: "Forty Properties" }],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "FORTY Properties",
-    title: "FORTY Properties | We Buy Land for Cash",
+    siteName: "Forty Properties",
+    title: "Forty Properties | We Buy Land for Cash",
     description:
-      "FORTY Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
+      "Forty Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
     images: [
       {
         url: "/images/hero-land.png",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FORTY Properties | We Buy Land for Cash",
+    title: "Forty Properties | We Buy Land for Cash",
     description:
-      "FORTY Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
+      "Forty Properties buys vacant land directly from property owners. Get a straightforward cash offer and a simple selling process.",
     images: ["/images/hero-land.png"],
   },
   robots: { index: true, follow: true },
@@ -70,9 +70,9 @@ export const viewport: Viewport = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
-  name: "FORTY Properties",
+  name: "Forty Properties",
   description:
-    "FORTY Properties buys vacant land directly from property owners with a simple, straightforward process.",
+    "Forty Properties buys vacant land directly from property owners with a simple, straightforward process.",
   url: SITE_URL,
   slogan: "We Buy Land for Cash",
   areaServed: "United States",

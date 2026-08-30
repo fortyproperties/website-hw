@@ -8,7 +8,7 @@ import { CtaSection } from "@/components/cta-section"
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "FORTY Properties works directly with landowners to buy vacant land for cash. Learn how we make selling land simple, honest, and straightforward.",
+    "Forty Properties works directly with landowners to buy vacant land for cash. Learn how we make selling land simple, honest, and straightforward.",
   alternates: { canonical: "/about" },
 }
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About FORTY Properties"
+        eyebrow="About Forty Properties"
         title="A Simpler Way to Sell Land"
         description="We work directly with property owners to purchase vacant land and create a straightforward path from property to closing."
       />
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              FORTY Properties is a land-buying company focused on making the
+              Forty Properties is a land-buying company focused on making the
               sale of vacant land easier for property owners. We purchase land
               directly, which means you can skip the steps that often make
               selling feel complicated.
@@ -82,7 +82,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
           <SectionHeading
             eyebrow="What sets us apart"
-            title="Why FORTY Properties?"
+            title="Why Forty Properties?"
             align="center"
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2">

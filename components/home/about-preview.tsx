@@ -18,9 +18,9 @@ export function AboutPreview() {
 
         <div>
           <SectionHeading
-            eyebrow="About FORTY Properties"
+            eyebrow="About Forty Properties"
             title="Selling land should be simple"
-            description="At FORTY Properties, we believe selling land should be simple. We work directly with property owners to purchase vacant land and create a straightforward path from property to closing."
+            description="At Forty Properties, we believe selling land should be simple. We work directly with property owners to purchase vacant land and create a straightforward path from property to closing."
           />
           <div className="mt-8">
             <CtaButton href="/about" variant="outline" size="lg">

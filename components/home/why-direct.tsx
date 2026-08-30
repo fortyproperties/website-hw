@@ -17,7 +17,7 @@ export function WhyDirect() {
           <SectionHeading
             eyebrow="Why sell directly?"
             title="Selling land doesn't have to be complicated"
-            description="Instead of preparing your property for the market, paying commissions, scheduling showings, and waiting for the right buyer, you can work directly with FORTY Properties."
+            description="Instead of preparing your property for the market, paying commissions, scheduling showings, and waiting for the right buyer, you can work directly with Forty Properties."
           />
 
           <ul className="mt-8 flex flex-col gap-4">

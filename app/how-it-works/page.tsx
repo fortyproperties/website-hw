@@ -5,7 +5,7 @@ import { CtaSection } from "@/components/cta-section"
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "See how selling vacant land to FORTY Properties works, from your first message to a simple closing. A clear, no-pressure process for landowners.",
+    "See how selling vacant land to Forty Properties works, from your first message to a simple closing. A clear, no-pressure process for landowners.",
   alternates: { canonical: "/how-it-works" },
 }
 
@@ -43,7 +43,7 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How it works"
         title="Selling Your Land Can Be Simple"
-        description="From your first message to a straightforward closing, here's exactly what to expect when you work with FORTY Properties."
+        description="From your first message to a straightforward closing, here's exactly what to expect when you work with Forty Properties."
       />
 
       <section className="bg-background">

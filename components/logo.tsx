@@ -6,7 +6,7 @@ type LogoProps = {
 }
 
 /**
- * FORTY Properties wordmark rendered with type so it stays crisp
+ * Forty Properties wordmark rendered with type so it stays crisp
  * at every size and inverts cleanly on dark backgrounds.
  */
 export function Logo({ invert = false, className }: LogoProps) {
@@ -17,7 +17,7 @@ export function Logo({ invert = false, className }: LogoProps) {
         invert ? "text-primary-foreground" : "text-foreground",
         className,
       )}
-      aria-label="FORTY Properties"
+      aria-label="Forty Properties"
     >
       <span className="text-2xl font-semibold tracking-tight">40</span>
       <span

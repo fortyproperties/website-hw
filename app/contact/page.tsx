@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/contact-form"
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Have vacant land you're considering selling? Contact FORTY Properties for a straightforward cash offer with no obligation.",
+    "Have vacant land you're considering selling? Contact Forty Properties for a straightforward cash offer with no obligation.",
   alternates: { canonical: "/contact" },
 }
 
