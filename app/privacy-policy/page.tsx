@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <h2>Contact</h2>
       <p>
         If you have questions about this policy, you can reach us at
-        hello@fortyproperties.com.
+        info@fortyproperties.com.
       </p>
     </LegalLayout>
   )

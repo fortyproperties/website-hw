@@ -55,7 +55,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <span className="text-primary-foreground/60">Email: </span>
-                hello@fortyproperties.com
+                info@fortyproperties.com
               </li>
             </ul>
           </div>

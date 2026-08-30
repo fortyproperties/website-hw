@@ -53,7 +53,7 @@ export default function ContactPage() {
                     Email
                   </p>
                   <p className="mt-1 text-base text-foreground">
-                    hello@fortyproperties.com
+                    info@fortyproperties.com
                   </p>
                 </div>
               </li>

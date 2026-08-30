@@ -30,7 +30,7 @@ export default function TermsPage() {
       <h2>Contact</h2>
       <p>
         Questions about these terms can be directed to
-        hello@fortyproperties.com.
+        info@fortyproperties.com.
       </p>
     </LegalLayout>
   )
