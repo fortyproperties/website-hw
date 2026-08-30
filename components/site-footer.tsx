@@ -61,7 +61,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-3 text-sm text-primary-foreground/80">
               <li>
                 <span className="text-primary-foreground/60">Phone: </span>
-                (616) 349-1201
+                (616) 422-4751
               </li>
               <li>
                 <span className="text-primary-foreground/60">Email: </span>

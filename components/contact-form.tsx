@@ -10,7 +10,10 @@ type ContactState = {
   errors?: Record<string, string>
 }
 
-const initialState: ContactState = { status: "idle", message: "" }
+const initialState: ContactState = {
+  status: "idle",
+  message: "",
+}
 
 const US_STATES = new Set([
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID",
@@ -19,6 +22,20 @@ const US_STATES = new Set([
   "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
   "WI", "WY", "DC",
 ])
+
+function formatPhone(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 10)
+
+  if (digits.length <= 3) {
+    return digits
+  }
+
+  if (digits.length <= 6) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+  }
+
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+}
 
 function Field({
   label,
@@ -29,6 +46,8 @@ function Field({
   placeholder,
   error,
   className,
+  value,
+  onChange,
 }: {
   label: string
   name: string
@@ -38,6 +57,8 @@ function Field({
   placeholder?: string
   error?: string
   className?: string
+  value?: string
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
@@ -53,6 +74,8 @@ function Field({
         required={required}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${name}-error` : undefined}
         className={cn(
@@ -71,28 +94,85 @@ function Field({
 }
 
 export function ContactForm() {
-  const [state, setState] = useState<ContactState>(initialState)
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    acreage: "",
+    message: "",
+    company: "",
+  })
+
+  const [contactState, setContactState] =
+    useState<ContactState>(initialState)
+
   const [pending, setPending] = useState(false)
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = event.target
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }))
+
+    if (contactState.errors?.[name]) {
+      setContactState((previous) => ({
+        ...previous,
+        errors: {
+          ...previous.errors,
+          [name]: "",
+        },
+      }))
+    }
+  }
+
+  function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const formattedPhone = formatPhone(event.target.value)
+
+    setFormData((previous) => ({
+      ...previous,
+      phone: formattedPhone,
+    }))
+
+    if (contactState.errors?.phone) {
+      setContactState((previous) => ({
+        ...previous,
+        errors: {
+          ...previous.errors,
+          phone: "",
+        },
+      }))
+    }
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const formData = new FormData(event.currentTarget)
-
     const values = {
-      firstName: String(formData.get("firstName") ?? "").trim(),
-      lastName: String(formData.get("lastName") ?? "").trim(),
-      email: String(formData.get("email") ?? "").trim(),
-      phone: String(formData.get("phone") ?? "").trim(),
-      address: String(formData.get("address") ?? "").trim(),
-      city: String(formData.get("city") ?? "").trim(),
-      state: String(formData.get("state") ?? "").trim().toUpperCase(),
-      zip: String(formData.get("zip") ?? "").trim(),
-      company: String(formData.get("company") ?? "").trim(),
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      address: formData.address.trim(),
+      city: formData.city.trim(),
+      state: formData.state.trim().toUpperCase(),
+      zip: formData.zip.trim(),
+      acreage: formData.acreage.trim(),
+      message: formData.message.trim(),
+      company: formData.company.trim(),
     }
 
+    // Spam protection
     if (values.company) {
-      setState({
+      setContactState({
         status: "success",
         message: "Thanks — we'll be in touch soon.",
       })
@@ -101,8 +181,13 @@ export function ContactForm() {
 
     const errors: Record<string, string> = {}
 
-    if (!values.firstName) errors.firstName = "First name is required."
-    if (!values.lastName) errors.lastName = "Last name is required."
+    if (!values.firstName) {
+      errors.firstName = "First name is required."
+    }
+
+    if (!values.lastName) {
+      errors.lastName = "Last name is required."
+    }
 
     if (!values.email) {
       errors.email = "Email is required."
@@ -112,12 +197,17 @@ export function ContactForm() {
 
     if (!values.phone) {
       errors.phone = "Phone is required."
-    } else if (values.phone.replace(/\D/g, "").length < 10) {
-      errors.phone = "Enter a valid phone number."
+    } else if (values.phone.replace(/\D/g, "").length !== 10) {
+      errors.phone = "Enter a valid 10-digit phone number."
     }
 
-    if (!values.address) errors.address = "Property address is required."
-    if (!values.city) errors.city = "City is required."
+    if (!values.address) {
+      errors.address = "Property address is required."
+    }
+
+    if (!values.city) {
+      errors.city = "City is required."
+    }
 
     if (!values.state) {
       errors.state = "State is required."
@@ -132,7 +222,7 @@ export function ContactForm() {
     }
 
     if (Object.keys(errors).length > 0) {
-      setState({
+      setContactState({
         status: "error",
         message: "Please correct the highlighted fields.",
         errors,
@@ -141,27 +231,74 @@ export function ContactForm() {
     }
 
     setPending(true)
+    setContactState(initialState)
 
-    // The original server action only logged this data and did not
-    // actually submit it anywhere. Keep the same behavior for now.
-    console.log("[v0] New land inquiry:", {
-      ...Object.fromEntries(formData.entries()),
-      company: undefined,
-    })
+    try {
+      const response = await fetch("https://formspree.io/f/xjyvklaa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phone: values.phone,
+          propertyAddress: values.address,
+          city: values.city,
+          state: values.state,
+          zip: values.zip,
+          acreage: values.acreage,
+          message: values.message,
+        }),
+      })
 
-    setTimeout(() => {
-      setPending(false)
-      setState({
+      const result = await response.json().catch(() => null)
+
+      if (!response.ok) {
+        throw new Error(
+          result?.errors?.[0]?.message ||
+            result?.error ||
+            "Something went wrong.",
+        )
+      }
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        acreage: "",
+        message: "",
+        company: "",
+      })
+
+      setContactState({
         status: "success",
         message:
           "Thank you. We've received your information and will be in touch soon.",
       })
-    }, 500)
+    } catch (error) {
+      console.error("Contact form error:", error)
+
+      setContactState({
+        status: "error",
+        message:
+          "We couldn't send your message. Please try again or contact us directly.",
+      })
+    } finally {
+      setPending(false)
+    }
   }
 
-  const errors = state.errors ?? {}
+  const errors = contactState.errors ?? {}
 
-  if (state.status === "success") {
+  if (contactState.status === "success") {
     return (
       <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-card p-10 text-center">
         <span className="flex size-14 items-center justify-center rounded-full bg-secondary text-primary">
@@ -173,7 +310,7 @@ export function ContactForm() {
         </h2>
 
         <p className="max-w-md text-pretty leading-relaxed text-muted-foreground">
-          {state.message}
+          {contactState.message}
         </p>
       </div>
     )
@@ -185,17 +322,21 @@ export function ContactForm() {
       className="rounded-xl border border-border bg-card p-6 sm:p-8"
       noValidate
     >
+      {/* Hidden spam protection field */}
       <div
         aria-hidden="true"
         className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
       >
         <label htmlFor="company">Company</label>
+
         <input
           id="company"
           name="company"
           type="text"
           tabIndex={-1}
           autoComplete="off"
+          value={formData.company}
+          onChange={handleChange}
         />
       </div>
 
@@ -205,6 +346,9 @@ export function ContactForm() {
           name="firstName"
           required
           autoComplete="given-name"
+          placeholder="John"
+          value={formData.firstName}
+          onChange={handleChange}
           error={errors.firstName}
         />
 
@@ -213,6 +357,9 @@ export function ContactForm() {
           name="lastName"
           required
           autoComplete="family-name"
+          placeholder="Doe"
+          value={formData.lastName}
+          onChange={handleChange}
           error={errors.lastName}
         />
 
@@ -222,6 +369,9 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
+          placeholder="john@example.com"
+          value={formData.email}
+          onChange={handleChange}
           error={errors.email}
         />
 
@@ -231,6 +381,9 @@ export function ContactForm() {
           type="tel"
           required
           autoComplete="tel"
+          placeholder="(616) 555-0123"
+          value={formData.phone}
+          onChange={handlePhoneChange}
           error={errors.phone}
         />
 
@@ -239,7 +392,10 @@ export function ContactForm() {
           name="address"
           required
           autoComplete="street-address"
+          placeholder="123 Main St"
           className="sm:col-span-2"
+          value={formData.address}
+          onChange={handleChange}
           error={errors.address}
         />
 
@@ -248,6 +404,9 @@ export function ContactForm() {
           name="city"
           required
           autoComplete="address-level2"
+          placeholder="Holland"
+          value={formData.city}
+          onChange={handleChange}
           error={errors.city}
         />
 
@@ -256,8 +415,10 @@ export function ContactForm() {
             label="State"
             name="state"
             required
-            placeholder="TX"
+            placeholder="MI"
             autoComplete="address-level1"
+            value={formData.state}
+            onChange={handleChange}
             error={errors.state}
           />
 
@@ -266,16 +427,12 @@ export function ContactForm() {
             name="zip"
             required
             autoComplete="postal-code"
+            placeholder="49423"
+            value={formData.zip}
+            onChange={handleChange}
             error={errors.zip}
           />
         </div>
-
-        <Field
-          label="Approximate Acreage"
-          name="acreage"
-          placeholder="e.g. 5"
-          className="sm:col-span-2"
-        />
 
         <div className="flex flex-col gap-2 sm:col-span-2">
           <label
@@ -290,14 +447,16 @@ export function ContactForm() {
             name="message"
             rows={4}
             placeholder="Tell us a little about your property."
+            value={formData.message}
+            onChange={handleChange}
             className="rounded-md border border-input bg-background px-3.5 py-3 text-base text-foreground transition-colors placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 focus:ring-offset-background"
           />
         </div>
       </div>
 
-      {state.status === "error" && state.message ? (
+      {contactState.status === "error" && contactState.message ? (
         <p className="mt-5 text-sm text-destructive" role="alert">
-          {state.message}
+          {contactState.message}
         </p>
       ) : null}
 

@@ -41,7 +41,7 @@ export default function ContactPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                     Phone
                   </p>
-                  <p className="mt-1 text-base text-foreground">(000) 000-0000</p>
+                  <p className="mt-1 text-base text-foreground">(616) 422-4751</p>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -54,19 +54,6 @@ export default function ContactPage() {
                   </p>
                   <p className="mt-1 text-base text-foreground">
                     info@fortyproperties.com
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                  <Clock className="size-5" />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                    Response
-                  </p>
-                  <p className="mt-1 text-base text-foreground">
-                    We review every inquiry we receive.
                   </p>
                 </div>
               </li>
