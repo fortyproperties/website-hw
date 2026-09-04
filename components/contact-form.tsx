@@ -477,8 +477,11 @@ export function ContactForm() {
         </button>
       </div>
 
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        Submitting this form does not obligate you to sell your property.
+      <p className="mt-4 text-[10px] leading-relaxed text-muted-foreground text-center">
+        By providing your phone number, you agree to receive text messages from
+        Forty Properties about inquiries, offers, follow-ups, appointments, and
+        other communications related to our services. Message frequency varies.
+        Message and data rates may apply. Reply STOP to opt out.
       </p>
     </form>
   )
